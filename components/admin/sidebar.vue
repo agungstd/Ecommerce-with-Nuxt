@@ -28,6 +28,12 @@
         </svg> Invoices</nuxt-link>
     </li>
 
+    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-reports'}" class="c-sidebar-nav-link">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-chart-pie"></use>
+        </svg> Reports</nuxt-link>
+    </li>
+
     <li class="c-sidebar-nav-title">OTHERS</li>
 
     <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-customers'}" class="c-sidebar-nav-link">
@@ -48,18 +54,49 @@
         </svg> Users</nuxt-link>
     </li>
 
+    <li class="c-sidebar-nav-item"><nuxt-link :to="{name: 'admin-settings'}" class="c-sidebar-nav-link">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-settings"></use>
+        </svg> Settings</nuxt-link>
+    </li>
+
     <li class="c-sidebar-nav-divider"></li>
+
+    <li class="c-sidebar-nav-item">
+      <a @click.prevent="logout" class="c-sidebar-nav-link">
+        <svg class="c-sidebar-nav-icon">
+          <use xlink:href="@/node_modules/@coreui/icons/sprites/free.svg#cil-account-logout"></use>
+        </svg> Logout
+      </a>
+    </li>
   </ul>
 </template>
 
 <script>
   export default {
-
+    methods: {
+      logout() {
+        // Call your logout action or method here
+        this.$store.dispatch('auth/logout')
+          .then(() => {
+            this.$router.push({ name: 'login' });
+          });
+      }
+    }
   }
 </script>
 
 <style scoped>
   a.nuxt-link-active {
     background: rgba(255,255,255,.05)!important;
+  }
+  
+  .c-sidebar-nav-link {
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .c-sidebar-nav-link:hover {
+    background: rgba(255,255,255,.03)!important;
   }
 </style>
